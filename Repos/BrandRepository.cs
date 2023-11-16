@@ -5,25 +5,42 @@ namespace graphql_dummy_data.Repos
 {
     public class BrandRepository : IBrandRepository
     {
-
-        List<Brand> brands = new()
+        readonly List<Brand> brands = new()
         {
-
+            new Brand()
+            {
+                Id = 1,
+                Name = "GM",
+                Country = "US",
+            },
+            new Brand()
+            {
+                Id = 2,
+                Name = "Hyunday",
+                Country = "KR",
+            },
+            new Brand()
+            {
+                Id = 3,
+                Name = "Toyota",
+                Country = "JP",
+            }
         };
 
-        public Task<int> AddBrand()
+        public int AddBrand(Brand brand)
         {
-            throw new NotImplementedException();
+            brands.Add(brand);
+            return brand.Id;
         }
 
-        public async Task<List<Brand>> GetBrands()
+        public List<Brand> GetBrands()
         {
-            return await dbContext.Brands.ToListAsync();
+            return brands;
         }
 
-        public async Task<Brand> GetById(int id)
+        public Brand GetById(int id)
         {
-            return await dbContext.Brands.FirstOrDefaultAsync(x => x.Id == id);
+            return brands.FirstOrDefault(x => x.Id == id);
         }
     }
 }

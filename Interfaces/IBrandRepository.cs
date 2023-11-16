@@ -4,7 +4,7 @@ namespace graphql_dummy_data.Interfaces;
 
 public interface IBrandRepository
 {
-    Task<int> AddBrand();
-    Task<List<Brand>> GetBrands();
-    Task<Brand> GetById(int id);
+    int AddBrand(Brand brand);
+    List<Brand> GetBrands();
+    Brand GetById(int id);
 }

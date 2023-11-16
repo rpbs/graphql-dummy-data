@@ -10,14 +10,14 @@ namespace graphql_dummy_data.Queries
     {
         public BrandQuery(IBrandRepository brandRepository)  
         {
-            Field<ListGraphType<BrandType>>("brands").ResolveAsync(async context =>
+            Field<ListGraphType<BrandType>>("brands").Resolve(context =>
             {
-                return await brandRepository.GetBrands();
+                return brandRepository.GetBrands();
             });
 
-            Field<BrandType>("brand").Arguments(new QueryArguments(new QueryArgument<IntGraphType> { Name = "brandId" })).ResolveAsync(async context =>
+            Field<BrandType>("brand").Arguments(new QueryArguments(new QueryArgument<IntGraphType> { Name = "brandId" })).Resolve(context =>
             {
-                Brand car = await brandRepository.GetById(context.GetArgument<int>("brandId"));
+                Brand car = brandRepository.GetById(context.GetArgument<int>("brandId"));
                 return car;
             });
 
